@@ -7,18 +7,19 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Configuration
 @SessionScope
 public class StoreBasket {
-    private List<Long> storage = new ArrayList<>();
+    private List<Product> storage = new ArrayList<>();
 
-    public void add(Long id) {
-        storage.add(id);
+    public void add(Product product) {
+        storage.add(product);
     }
 
     public List<Long> get() {
-        return storage;
+        return storage.stream().map(e -> e.getId()).collect(Collectors.toList());
     }
 
 }
